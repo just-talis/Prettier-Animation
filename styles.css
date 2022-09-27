@@ -9,17 +9,32 @@
 }
 
 body {
-  background: #1a2b34;
+  background: var(--background);
   margin: 0;
   padding-top: 50px;
   padding-left: 50px;
 }
 
 .container {
+  position: relative;
   width: 600px;
   display: flex;
   flex-direction: column;
   gap: var(--unit);
+  overflow: hidden;
+}
+
+.container:hover {
+    border: 1px solid white;
+}
+
+.container:hover::before {
+    content: "";
+    position: absolute;
+    width: 50%;
+    height: 100%;
+    opacity: .5;
+    background: red;
 }
 
 .row {
@@ -36,12 +51,37 @@ body {
   border-radius: 1000px;
 }
 
-.cell.size-2 {--size: 2;}
-.cell.size-3 {--size: 3;}
-.cell.size-4 {--size: 4;}
-.cell.size-5 {--size: 5;}
-.cell.size-6 {--size: 6;}
-.cell.size-7 {--size: 7;}
-.cell.size-8 {--size: 8;}
-.cell.size-9 {--size: 9;}
-.cell.size-10 {--size: 10;}
+.cell.size-2 { --size: 2;} 
+.cell.size-4 { --size: 4;}
+.cell.size-6 { --size: 6;}
+.cell.size-8 { --size: 8;}
+.cell.size-10 { --size: 10;}
+.cell.size-12 { --size: 12;}
+.cell.size-14 { --size: 14;}
+.cell.size-16 { --size: 16;}
+.cell.size-18 { --size: 18;}
+.cell.size-20 { --size: 20;}
+
+.cell.blue {background-color: var(--blue);}
+.cell.red {background-color: var(--red);}
+.cell.yellow {background-color: var(--yellow);}
+.cell.purple {background-color: var(--purple);}
+
+.row:nth-child(2) {--delay: 2;}
+
+.row:nth-child(3) {--delay: 3;}
+
+.row {
+    translate: -50px;
+    animation: load-row 1ms calc(var(--delay) * 500ms) forwards;
+}
+
+.row:nth-child(2n) {
+    translate: 50px;
+}
+
+@keyframes load-row {
+    100% {
+        translate: 0;
+    }
+}
