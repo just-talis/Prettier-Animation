@@ -31,7 +31,7 @@ body {
   justify-content: center;
   gap: var(--unit);
   translate: var(--offset);
-  animation: load-row 1ms calc(var(--delay) * 100ms + 500ms) forwards;
+  animation: load-row 1s calc(var(--delay) * 100ms + 500ms) forwards;
 }
 
 .cell {
@@ -82,12 +82,17 @@ body {
 }
 
 .container.slide .row {
-    animation: slide 500ms calc(var((--delay) - 1) * 100ms);
+    animation: slide 500ms calc(var((--delay) - 1) * 100ms) both;
 }
 
-.row:nth-child(2n) {--direction: -1;}
+.row:nth-child(2n) {
+    --direction: -1;
+}
 
 @keyframes slide {
+    0% {
+        translate: 0;
+    }
     100% {
         translate: calc(var(--container-width) * var(--direction, 1));
     }
