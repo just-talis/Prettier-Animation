@@ -31,7 +31,15 @@ body {
   justify-content: center;
   gap: var(--unit);
   translate: var(--offset);
-  animation: load-row 1s calc(var(--delay) * 100ms + 500ms) forwards;
+}
+
+:not(.duplicate) > .row {
+    animation: load-row 1s calc(var(--delay) * 100ms + 500ms) forwards;
+}
+
+.container.no-load:not(.slide) .row {
+    animation: none;
+    translate: 0;
 }
 
 .cell {
@@ -81,8 +89,8 @@ body {
     }
 }
 
-.container.slide .row {
-    animation: slide 500ms calc(var((--delay) - 1) * 100ms) both;
+.container.slide:not(.duplicate) > .row {
+    animation: slide 1s calc(var((--delay) - 1) * 100ms) both;
 }
 
 .row:nth-child(2n) {
@@ -96,4 +104,24 @@ body {
     100% {
         translate: calc(var(--container-width) * var(--direction, 1));
     }
+}
+
+.container.duplicate {
+    position: absolute;
+}
+
+.container.duplicate .row {
+    translate: var(--container-width);
+}
+
+.container.slide .container.duplicate .row {
+    animation: slide 1s calc(var((--delay) - 1) * 100ms - 150ms) reverse both;
+}
+
+.container.slide .container.duplicate .row:nth-child(2n-1) {
+    --direction: -1;
+}
+
+.container.slide .container.duplicate .row:nth-child(2n) {
+    --direction: 1;
 }
